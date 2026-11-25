@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SplitKane — Split expenses. Kane verifies the math.</title>
+<meta name="description" content="A zero-backend expense splitter whose split math is verified end-to-end in a real browser by Kane CLI. Built for the Kane CLI Online Hackathon.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <h1 data-testid="app-title">SplitKane</h1>
+  <p class="tagline">Split expenses with friends. The math is verified in a real browser by <strong>Kane CLI</strong> — every release ships only if Kane passes.</p>
+  <p class="badge" data-testid="verify-badge" id="verify-badge">Verification: not run yet — see <code>npm run verify</code></p>
+</header>
+
+<main>
+  <section class="card" aria-label="People">
+    <h2>1 · Who's in?</h2>
+    <form id="person-form">
+      <label for="person-name-input">Name</label>
+      <input id="person-name-input" data-testid="person-name-input" type="text" placeholder="e.g. Aa" autocomplete="off">
+      <button type="submit" data-testid="add-person-btn">Add person</button>
+    </form>
+    <ul id="people-list" data-testid="people-list" class="people"></ul>
+    <p class="hint">Tip: press <strong>Load demo group</strong> to seed Aa, Sis &amp; Budi in one click.</p>
+    <button id="seed-demo-btn" data-testid="seed-demo-btn" type="button" class="secondary">Load demo group</button>
+    <button id="clear-all-btn" data-testid="clear-all-btn" type="button" class="secondary danger">Clear all</button>
+  </section>
+
+  <section class="card" aria-label="Add expense">
+    <h2>2 · Add an expense</h2>
+    <form id="expense-form">
+      <label for="expense-desc-input">What was it?</label>
+      <input id="expense-desc-input" data-testid="expense-desc-input" type="text" placeholder="e.g. Dinner" autocomplete="off">
+      <label for="expense-amount-input">Amount (USD)</label>
+      <input id="expense-amount-input" data-testid="expense-amount-input" type="text" inputmode="decimal" placeholder="e.g. 30.00" autocomplete="off">
+      <label for="expense-payer-select">Paid by</label>
+      <select id="expense-payer-select" data-testid="expense-payer-select"></select>
+      <button type="submit" data-testid="add-expense-btn">Add expense</button>
+    </form>
+    <p id="error-message" data-testid="error-message" class="error" role="alert" hidden></p>
+    <ul id="expenses-list" data-testid="expenses-list" class="expenses"></ul>
+  </section>
+
+  <section class="card" aria-label="Balances">
+    <h2>3 · Who owes whom</h2>
+    <p>Total spent: <strong id="total-spent" data-testid="total-spent">$0.00</strong></p>
+    <ul id="balances-list" data-testid="balances-list" class="balances"></ul>
+    <h3>Settle up</h3>
+    <ul id="settlement-list" data-testid="settlement-list" class="settlement"></ul>
+    <p id="settled-note" data-testid="settled-note" class="settled" hidden>All settled up — everybody is even. 🎉</p>
+  </section>
+</main>
+
+<footer>
+  <p>SplitKane · Kane CLI Online Hackathon (TestMu AI) · No backend, no login, no tracking. Data lives only in your browser (localStorage).</p>
+  <p>Verify it yourself: <code>npm run verify</code> — Kane CLI drives this page in real Chrome and checks the split math end to end.</p>
+</footer>
+
+<script src="src/split.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
